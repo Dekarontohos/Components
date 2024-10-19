@@ -21,6 +21,7 @@ export const App = () => {
 						setOperand1(operand1 + props.target.innerText);
 					}
 				}}
+				key={num}
 			>
 				{num}
 			</button>
@@ -42,7 +43,24 @@ export const App = () => {
 	};
 
 	const calcExpression = () => {
-		setOperand1(eval(operand1 + operator + operand2));
+		let result;
+		switch (operator) {
+			case "+":
+				result = Number(operand1) + Number(operand2);
+				break;
+			case "-":
+				result = Number(operand1) - Number(operand2);
+				break;
+			case "×":
+				result = Number(operand1) * Number(operand2);
+				break;
+			case "÷":
+				result = Number(operand1) / Number(operand2);
+				break;
+			default:
+				result = operand1;
+		}
+		setOperand1(result);
 		setOperator("");
 		setOperand2("");
 		setItsResult(true);
@@ -77,6 +95,22 @@ export const App = () => {
 					}}
 				>
 					{"-"}
+				</button>
+				<button
+					className={styles["button"]}
+					onClick={(props) => {
+						clickOperatorButton(props);
+					}}
+				>
+					{"×"}
+				</button>
+				<button
+					className={styles["button"]}
+					onClick={(props) => {
+						clickOperatorButton(props);
+					}}
+				>
+					{"÷"}
 				</button>
 				<button
 					className={styles["button"]}
